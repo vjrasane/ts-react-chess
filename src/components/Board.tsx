@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Square from "./square";
+import Square from "./Square";
 import { BoardState, SquareContent } from "../game/board";
 import { BoardCoordinates, getCoordinateNotation } from "../utils/coordinates";
 import {
