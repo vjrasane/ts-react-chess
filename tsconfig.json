@@ -8,6 +8,6 @@
     "target": "es5",
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
-    "typeRoots": ["./node_modules/@types", "./types"]
+    "typeRoots": ["./types"]
   }
 }

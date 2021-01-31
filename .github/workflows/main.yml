@@ -11,7 +11,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os:
+          - ubuntu-latest
+          - windows-latest
     steps:
       - uses: actions/setup-node@v1
         with:
@@ -47,4 +49,6 @@ jobs:
           BRANCH: github-pages
           FOLDER: dist
           CLEAN: true
+    needs:
+      - test
 
