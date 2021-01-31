@@ -3,13 +3,11 @@ import check from "../../images/indicators/orange_glow.png";
 import checkmate from "../../images/indicators/red_glow.png";
 import stalemate from "../../images/indicators/blue_glow.png";
 import move from "../../images/indicators/green_dot.png";
-import { mergeAll } from "lodash/fp";
 import { ThreatType } from "../game/game";
 import { LAYER_MOVE_INDICATOR, LAYER_SQUARE_STATE } from "../utils/constants";
+import { BoardCoordinates, getCoordinateNotation } from "../utils/coordinates";
 
-type SquareState = "check" | "checkmate" | "stalemate";
-
-const getSquareStateImage = (type: SquareState) => {
+const getSquareStateImage = (type: ThreatType) => {
   switch (type) {
     case "check":
       return check;
@@ -34,11 +32,16 @@ const stateIndicatorStyle = {
 };
 
 type SquareStateIndicatorProps = {
+  position: BoardCoordinates;
   state: ThreatType;
 };
 
-const SquareStateIndicator = ({ state }: SquareStateIndicatorProps) => {
-  return <img src={getSquareStateImage(state)} style={stateIndicatorStyle} />;
+const SquareStateIndicator = ({ position, state }: SquareStateIndicatorProps) => {
+  return <img
+   id={`${getCoordinateNotation(position)}-state`}
+   src={getSquareStateImage(state)}
+   data-state={state}
+   style={stateIndicatorStyle} />;
 };
 
 const moveIndicatorStyle = {
@@ -58,4 +61,4 @@ const moveIndicatorStyle = {
 
 const MoveIndicator = () => <img src={move} style={moveIndicatorStyle}/>;
 
-export { MoveIndicator, SquareStateIndicator, SquareState };
+export { MoveIndicator, SquareStateIndicator };

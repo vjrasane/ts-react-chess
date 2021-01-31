@@ -103,9 +103,13 @@ const Square = ({ content, position }: SquareProps) => {
     if (!content) return null;
     const opacity: number = isEqual(moveStart?.position, position) ? 0.4 : 1;
     const style = mergeAll([{}, pieceStyle, { opacity }]);
+    const contentId = `${getCoordinateNotation(position)}-content`
     return (
       <img
+        id={contentId}
         style={style}
+        data-piece={content.type}
+        data-player={content.player}
         draggable={false}
         src={getPieceImage(content)}
         onMouseDown={onMoveBegin}
@@ -121,7 +125,7 @@ const Square = ({ content, position }: SquareProps) => {
       style={style}
       onMouseOver={onMouseOver}
     >
-      {!!threat && <SquareStateIndicator state={threat.type} />}
+      {!!threat && <SquareStateIndicator state={threat.type} position={position}/>}
       {contentImage}
       {!!moveCandidates.length && <MoveIndicator />}
       {!!isQueeningSquare && <QueeningMenu choices={queeningChoices} />}

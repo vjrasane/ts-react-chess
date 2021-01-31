@@ -4,8 +4,32 @@ on:
   push:
     branches: [ master ]
   workflow_dispatch:
-  
+
 jobs:
+  test:
+    name: Run TestCafe Tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [8, 10, 12]
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Check out the repository
+        uses: actions/checkout@v1
+        with:
+          persist-credentials: false
+      - name: Build
+        run: |
+          yarn install
+          yarn build
+      - name: Run tests
+        uses: DevExpress/testcafe-action@latest
+        with:
+            args: "\"chrome:headless\"" tests --app \"http-server dist\""
+
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
