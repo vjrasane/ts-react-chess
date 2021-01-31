@@ -12,11 +12,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        node: [8, 10, 12]
     steps:
       - uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 12
       - name: Check out the repository
         uses: actions/checkout@v1
         with:
