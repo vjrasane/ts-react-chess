@@ -5,9 +5,10 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "serve" : "http-server dist -p 9000",
+    "serve": "http-server dist -p 9000",
     "test": "testcafe chrome tests --app \"http-server dist\"",
-    "pretest" : "npm run build",
+    "test:ci": "testcafe \"chrome:headless\" tests --app \"http-server dist\"",
+    "pretest": "npm run build",
     "start": "webpack serve"
   },
   "dependencies": {
